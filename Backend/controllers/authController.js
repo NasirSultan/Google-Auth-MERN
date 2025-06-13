@@ -2,6 +2,10 @@ const { OAuth2Client } = require('google-auth-library');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+
+const crypto = require('crypto');
+const axios = require('axios');
+
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const generateToken = (user) => {
@@ -102,8 +106,96 @@ const login = async (req, res) => {
   }
 };
 
+
+
+
+
+
+const otpStore = []; // In-memory store for OTPs
+
+const generateOtp = () => Math.floor(100000 + Math.random() * 900000).toString();
+
+// ✅ Step 1: Send OTP to email
+const requestPasswordReset = async (req, res) => {
+  const { email, newPassword } = req.body;
+
+  if (!email || !newPassword)
+    return res.status(400).json({ message: 'Email and new password are required' });
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    const otp = generateOtp();
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    const expiresAt = Date.now() + 10 * 60 * 1000; // 10 mins
+
+    // Remove existing OTPs for the user
+    const existingIndex = otpStore.findIndex(entry => entry.email === email);
+    if (existingIndex !== -1) otpStore.splice(existingIndex, 1);
+
+    otpStore.push({ email, otp, hashedPassword, expiresAt });
+
+    // Send via Resend API
+    await axios.post(
+      'https://api.resend.com/emails',
+      {
+        from: 'onboarding@resend.dev',
+        to: email,
+        subject: 'OTP for Password Reset',
+        html: `<p>Your OTP is <strong>${otp}</strong>. It will expire in 10 minutes.</p>`,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    return res.status(200).json({ message: 'OTP sent to your email address' });
+  } catch (error) {
+    console.error("OTP Send Error:", error);
+    return res.status(500).json({ message: 'Failed to send OTP' });
+  }
+};
+
+// ✅ Step 2: Verify OTP and reset password
+const verifyOtpAndResetPassword = async (req, res) => {
+  const { otp } = req.body;
+  if (!otp) return res.status(400).json({ message: 'OTP is required' });
+
+  const otpEntry = otpStore.find(entry => entry.otp === otp);
+  if (!otpEntry || Date.now() > otpEntry.expiresAt) {
+    return res.status(400).json({ message: 'Invalid or expired OTP' });
+  }
+
+  try {
+    const user = await User.findOne({ email: otpEntry.email });
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    user.password = otpEntry.hashedPassword;
+    await user.save();
+
+    // Remove OTP from memory
+    otpStore.splice(otpStore.indexOf(otpEntry), 1);
+
+    return res.status(200).json({ message: '✅ Password has been reset successfully!' });
+  } catch (error) {
+    console.error("Reset Error:", error);
+    return res.status(500).json({ message: 'Failed to reset password' });
+  }
+};
+
+
+
+
+
+
 module.exports = {
   googleLogin,
   register,
   login,
+  requestPasswordReset,
+  verifyOtpAndResetPassword,
 };

@@ -51,12 +51,12 @@ export default function Register() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="relative">
-            <FaUser className="absolute left-3 top-3.5 text-black" size={24} />
+            <FaUser className="absolute left-3 top-3 text-black" size={14} />
             <input
               type="text"
               name="name"
               placeholder="Name"
-              className="pl-10 w-full px-4 py-2 border rounded-lg bg-white text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              className="pl-10 w-full px-4 py-1 border rounded-lg bg-white text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
               value={form.name}
               onChange={handleChange}
               required
@@ -65,14 +65,14 @@ export default function Register() {
 
           <div className="relative">
             <FaEnvelope
-              className="absolute left-3 top-3.5 text-black"
-              size={24}
+              className="absolute left-3 top-3 text-black"
+              size={14}
             />
             <input
               type="email"
               name="email"
               placeholder="Email"
-              className="pl-10 w-full px-4 py-2 border rounded-lg bg-white text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              className="pl-10 w-full px-4 py-1 border rounded-lg bg-white text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
               value={form.email}
               onChange={handleChange}
               required
@@ -80,12 +80,12 @@ export default function Register() {
           </div>
 
           <div className="relative">
-            <FaLock className="absolute left-3 top-3.5 text-black" size={24} />
+            <FaLock className="absolute left-3 top-3 text-black" size={14} />
             <input
               type="password"
               name="password"
               placeholder="Password"
-              className="pl-10 w-full px-4 py-2 border rounded-lg bg-white text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              className="pl-10 w-full px-4 py-1 border rounded-lg bg-white text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
               value={form.password}
               onChange={handleChange}
               required
@@ -93,12 +93,12 @@ export default function Register() {
           </div>
 
           <div className="relative">
-            <FaPhone className="absolute left-3 top-3.5 text-black" size={24} />
+            <FaPhone className="absolute left-3 top-3 text-black" size={12} />
             <input
               type="tel"
               name="phone"
               placeholder="Phone"
-              className="pl-10 w-full px-4 py-2 border rounded-lg bg-white text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              className="pl-10 w-full px-4 py-1 border rounded-lg bg-white text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
               value={form.phone}
               onChange={handleChange}
               required

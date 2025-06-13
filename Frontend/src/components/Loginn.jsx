@@ -43,11 +43,11 @@ function Login() {
         <form onSubmit={handleManualLogin} className="space-y-4">
 
           <div className="relative">
-            <FaEnvelope className="absolute left-3 top-3.5 text-black text-xl" />
+            <FaEnvelope className="absolute left-2 top-3 text-black pb-1" size={18} />
             <input
               type="email"
               placeholder="Email"
-              className="pl-12 w-full px-4 py-2 border rounded-lg bg-white text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              className="pl-12 w-full px-4 py-1 border  bg-white text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -55,39 +55,57 @@ function Login() {
           </div>
 
           <div className="relative">
-            <FaLock className="absolute left-3 top-3.5 text-black text-xl" />
+            <FaLock className="absolute left-2 top-3 text-black pb-1" size={18} />
             <input
               type="password"
               placeholder="Password"
-              className="pl-12 w-full px-4 py-2 border rounded-lg bg-white text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              className="pl-12 w-full px-4 py-1 border bg-white text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
 
+
+
+
+
+
+
           {error && <p className="text-red-500 text-sm">{error}</p>}
 
           <button
             type="submit"
-            className="w-full bg-black text-white font-semibold py-2 px-4 rounded-lg transition hover:opacity-90"
+            className="w-full bg-black text-white font-semibold py-2 px-4 cursor-pointer rounded-lg transition hover:opacity-90"
           >
             Login
+
           </button>
+
+          <div className="flex flex-col items-center gap-4">
+      <button
+        onClick={() => navigate('/Reset')}
+        className="text-blue-600 hover:underline cursor-pointer"
+      >
+        Reset Password
+      </button>
+    </div>
+
+
         </form>
 
-        <div className="flex items-center my-6">
+        <div className="flex items-center my-3">
           <hr className="flex-grow border-t border-gray-300" />
           <span className="px-4 text-gray-400">or</span>
           <hr className="flex-grow border-t border-gray-300" />
         </div>
 
-  
+
         <GoogleLoginButton setUser={setUser} />
 
         <p className="mt-6 text-center text-gray-700 text-sm">
           Not registered?{" "}
-          <a href="/register" className="text-black underline hover:opacity-80">
+          <a href="/register" className="text-black underline hover:opacity-90 hover:text-blue-700">
             Create an account
           </a>
         </p>
