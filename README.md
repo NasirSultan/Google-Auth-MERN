@@ -43,11 +43,11 @@ Includes secure user authentication with:
 
 This project has two main folders:
 
-* **`client/`** – contains the React frontend code
-* **`server/`** – contains the Node.js + Express backend code
+* **`Frontend/`** – contains the React frontend code
+* **`Backend/`** – contains the Node.js + Express backend code
 
 To explore the code or make changes:
 
-* Open `client/` for all React files like components, pages, and routes
-* Open `server/` for backend code including APIs, models, and authentication logic
+* Open `Frontend/` for all React files like components, pages, and routes
+* Open `Backend/` for backend code including APIs, models, and authentication logic
 
