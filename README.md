@@ -1,5 +1,4 @@
 
-
 # Full MERN Authentication App
 
 This is a complete authentication system built with the **MERN Stack**:
@@ -51,3 +50,23 @@ To explore the code or make changes:
 * Open `Frontend/` for all React files like components, pages, and routes
 * Open `Backend/` for backend code including APIs, models, and authentication logic
 
+---
+
+## Backend as NPM Package
+
+The authentication backend is also available as an installable NPM package.
+
+📦**NPM Package Name**: `node-auth-suite`
+🔗 **NPM Link**: [[https://www.npmjs.com/package/node-auth-suite](https://www.npmjs.com/package/node-auth-suite)](https://www.npmjs.com/package/node-auth-suite)
+
+### How to Use
+
+You can install it in your backend project using:
+
+```bash
+npm install node-auth-suite
+```
+
+> This package includes routes for authentication, user model integration, Google OAuth, email verification, and password reset.
+
+Make sure to configure your `.env` and initialize MongoDB and Express properly to integrate it.
