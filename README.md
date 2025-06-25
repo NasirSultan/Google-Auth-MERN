@@ -1,6 +1,4 @@
-Got it. Here's the updated `README.md` with a **clear section** that tells the reader where to visit the frontend and backend code in the project folders.
 
----
 
 # Full MERN Authentication App
 
