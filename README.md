@@ -56,9 +56,8 @@ To explore the code or make changes:
 
 The authentication backend is also available as an installable NPM package.
 
-📦**NPM Package Name**: `node-auth-suite`
-🔗 **NPM Link**: [[https://www.npmjs.com/package/node-auth-suite](https://www.npmjs.com/package/node-auth-suite)](https://www.npmjs.com/package/node-auth-suite)
-
+**NPM Package Name**: `node-auth-suite`
+🔗 **NPM Link**: [[https://www.npmjs.com/package/node-auth-suite](https://www.npmjs.com/package/node-auth-suite)]
 ### How to Use
 
 You can install it in your backend project using:
